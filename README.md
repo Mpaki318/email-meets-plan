@@ -1,26 +1,132 @@
-# AI Workplace Companion
+# AI Workplace Productivity Assistant
 
-Build a modern, responsive web application called "AI Workplace Productivity Assistant" that helps professionals automate everyday workplace tasks using AI. Include a dashboard layout with a sidebar navigation containing three sections: 1. Smart Email Generator 2. Meeting Notes Summarizer 3. AI Task Planner Also include an overview/home page with a welcome message and quick links to each feature. === FEATURE 1: Smart Email Generator === Input fields: - Recipient (name or role) - Subject / purpose of the email - Tone selector (Formal, Friendly, Persuasive) - Optional: key points to include (multi-line text box) Output: - An editable text box showing the AI-generated email (subject line + body) - A "Copy to clipboard" button - A "Regenerate" button === FEATURE 2: Meeting Notes Summarizer === Input: - A large text box for pasting raw meeting notes Output, broken into clearly labeled sections: - Summary (2-4 sentences) - Action Items (with owner name if mentioned in the notes, and deadline if mentioned) - Key Decisions Made If no action items or decisions are found, show "None detected" rather than leaving it blank. === FEATURE 3: AI Task Planner === Input: - A text box where the user lists their tasks (one per line, or free text) - A dropdown to choose "Daily" or "Weekly" view Output: - A prioritized, organized schedule (e.g. High/Medium/Low priority, or time-blocked) - Tasks displayed as a checklist the user can mark complete === DESIGN REQUIREMENTS === - Clean, modern, professional SaaS-style design - Mobile-friendly and responsive - Sidebar navigation that collapses on mobile - Light color palette with a single accent color - Loading state shown while AI is generating output - A visible "Responsible AI Disclaimer" in the footer: this tool generates AI-assisted suggestions and outputs should be reviewed by a human before use in real workplace communications. Structure the code cleanly with reusable components for each feature so it's easy to extend later.
+A modern, responsive web application that helps professionals automate everyday workplace tasks using AI. Built with [TanStack Start](https://tanstack.com/start), [React 19](https://react.dev), [TypeScript](https://www.typescriptlang.org), and [Tailwind CSS v4](https://tailwindcss.com).
 
-This project was built with [Lovable](https://lovable.dev).
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-**Live app**: https://email-meets-plan.lovable.app
+## Features
 
-## Build with Lovable
+### 1. Smart Email Generator
+Generate polished, context-aware emails in seconds.
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/f168b754-12d0-4833-87be-9688ed9e5083).
+- **Recipient** input (name or role)
+- **Subject / purpose** field
+- **Tone selector**: Formal, Friendly, or Persuasive
+- **Key points** textarea for must-include details
+- **Editable AI output** with one-click copy and regenerate
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+### 2. Meeting Notes Summarizer
+Turn raw meeting notes into structured, actionable insights.
 
-## Development
+- Paste notes and receive a concise **summary**
+- Extracted **action items** with owner and deadline detection
+- **Key decisions made** clearly listed
+- Graceful "None detected" messaging when no actions or decisions are found
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+### 3. AI Task Planner
+Transform a loose list of tasks into a prioritized schedule.
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+- Free-text or one-task-per-line input
+- **Daily** or **Weekly** view selector
+- Organized, prioritized task groups
+- Interactive checklists to mark tasks complete
+
+## Design
+
+- Clean, professional SaaS-style dashboard
+- Light color palette with a teal/blue accent
+- Collapsible sidebar for mobile and desktop
+- Loading states for all AI operations
+- **Responsible AI Disclaimer** in the footer: outputs are AI-assisted suggestions and should be reviewed by a human before real-world use
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Framework | TanStack Start v1 |
+| UI | React 19, shadcn/ui |
+| Styling | Tailwind CSS v4 |
+| Language | TypeScript |
+| AI | Lovable AI Gateway (Google Gemini 2.5 Flash) |
+| Routing | TanStack Router (file-based) |
+
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org) (LTS recommended)
+- [Bun](https://bun.sh) or npm
+- A `LOVABLE_API_KEY` environment variable for AI features
+
+### Install
+
+```bash
+bun install
 ```
+
+### Run Development Server
+
+```bash
+bun run dev
+```
+
+The app will be available at `http://localhost:8080`.
+
+### Build for Production
+
+```bash
+bun run build
+```
+
+## Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+LOVABLE_API_KEY=your_lovable_api_key_here
+```
+
+The `LOVABLE_API_KEY` is required for the AI-powered features (email generation, notes summarization, and task planning).
+
+## Project Structure
+
+```text
+src/
+├── components/
+│   ├── app-sidebar.tsx          # Collapsible navigation sidebar
+│   ├── features/
+│   │   ├── email-generator.tsx  # Smart Email Generator UI
+│   │   ├── notes-summarizer.tsx # Meeting Notes Summarizer UI
+│   │   └── task-planner.tsx     # AI Task Planner UI
+│   └── page-header.tsx          # Reusable page header
+├── lib/
+│   ├── ai-gateway.server.ts     # Lovable AI Gateway provider config
+│   ├── ai-types.ts              # Shared AI output types
+│   ├── ai.server.ts             # AI prompting and JSON parsing logic
+│   └── ai.functions.ts          # TanStack Start server functions
+├── routes/
+│   ├── __root.tsx               # Root layout with sidebar and footer
+│   ├── index.tsx                # Overview / home dashboard
+│   ├── email-generator.tsx      # /email-generator route
+│   ├── meeting-notes.tsx        # /meeting-notes route
+│   └── task-planner.tsx         # /task-planner route
+├── router.tsx                   # TanStack Router setup
+├── server.ts                    # Server entry
+├── start.ts                     # Start config
+└── styles.css                   # Global styles and theme tokens
+```
+
+## Customization
+
+- **Accent color**: update CSS variables in `src/styles.css`.
+- **AI model**: change `AI_MODEL` in `src/lib/ai-gateway.server.ts`.
+- **Prompts**: edit the system prompts in `src/lib/ai.server.ts`.
+- **Routes**: add new pages under `src/routes/` using TanStack Router file conventions.
+
+## Responsible AI
+
+This tool generates AI-assisted suggestions. All outputs should be reviewed by a human before being used in real workplace communications or decisions.
+
+## License
+
+MIT
