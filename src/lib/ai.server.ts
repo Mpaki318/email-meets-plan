@@ -6,7 +6,11 @@ import type { MeetingSummary, TaskPlan } from "./ai-types";
 
 const gatewayModel = () => getGateway()(AI_MODEL);
 
-async function generateJson<T>(system: string, prompt: string, schema: z.ZodType<T>): Promise<T> {
+async function generateJson<S extends z.ZodTypeAny>(
+  system: string,
+  prompt: string,
+  schema: S,
+): Promise<z.infer<S>> {
   const { text } = await generateText({
     model: gatewayModel(),
     system: `${system}\n\nRespond with valid JSON only. No markdown fences, no commentary.`,
