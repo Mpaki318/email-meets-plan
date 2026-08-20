@@ -1,4 +1,6 @@
-# AI Workplace Productivity Assistant
+# Email Meets Plan — AI Workplace Productivity Assistant
+
+**Project slug:** `email-meets-plan`
 
 A modern, responsive web application that helps professionals automate everyday workplace tasks using AI. Built with [TanStack Start](https://tanstack.com/start), [React 19](https://react.dev), [TypeScript](https://www.typescriptlang.org), and [Tailwind CSS v4](https://tailwindcss.com).
 
